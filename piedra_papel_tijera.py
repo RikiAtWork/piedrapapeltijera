@@ -68,7 +68,7 @@ while cont <= num_intentos:
     else:
         print("Entrada incorrecta. Vuelve a intentar.")
 
-print("RESULTADOS FINALES:")
+print("\nRESULTADOS FINALES:")
 if ganadas_usuario > ganadas_ordenador:
     print(f"Ha ganado la partida, {nombre}")
     print("-------------------")
