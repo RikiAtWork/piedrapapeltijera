@@ -22,6 +22,7 @@ def verificar_movimientos(usuario_movimento, ordenador_movimiento):
 
 
 print("JUEGO : Piedra, papel y tijera")
+nombre = input("Introduce tu nombre: ")
 while True:
     opcion = input("Quieres jugar? (s/n): ")
     if 's' in opcion.lower():
@@ -40,7 +41,7 @@ while True:
                     usuario_mov = tijera
                 print(f"Elección del usuario: {usuario_mov}")
                 if verificar_movimientos(usuario_mov, ordenador_mov) == 1:
-                    print("Gana el usuario !!!")
+                    print(f"Has ganado, {nombre} !!!")
                 elif verificar_movimientos(usuario_mov, ordenador_mov) == -1:
                     print("Gana el ordenador !!!")
                 elif verificar_movimientos(usuario_mov, ordenador_mov) == 0:
