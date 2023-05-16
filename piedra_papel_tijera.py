@@ -22,35 +22,57 @@ def verificar_movimientos(usuario_movimento, ordenador_movimiento):
 
 
 print("JUEGO : Piedra, papel y tijera")
+
 nombre = input("Introduce tu nombre: ")
-while True:
-    opcion = input("Quieres jugar? (s/n): ")
-    if 's' in opcion.lower():
-        ordenador_mov = generar_movimientos()
-        while True:
-            usuario_mov = ""
-            movimiento_car = input("Selecciona un movimiento ('p' para piedra / 'a' para papel "
-                                   "/ 't' para tijeras): ").lower()
-            print(f"Elección del ordenador: {ordenador_mov}")
-            if 'p' in movimiento_car or 'a' in movimiento_car or 't' in movimiento_car:
-                if 'p' in movimiento_car:
-                    usuario_mov = piedra
-                elif 'a' in movimiento_car:
-                    usuario_mov = papel
-                elif 't' in movimiento_car:
-                    usuario_mov = tijera
-                print(f"Elección del usuario: {usuario_mov}")
-                if verificar_movimientos(usuario_mov, ordenador_mov) == 1:
-                    print(f"Has ganado, {nombre} !!!")
-                elif verificar_movimientos(usuario_mov, ordenador_mov) == -1:
-                    print("Gana el ordenador !!!")
-                elif verificar_movimientos(usuario_mov, ordenador_mov) == 0:
-                    print("Empate !!!")
-                break
-            else:
-                print("Entrada incorrecta. Vuelve a intentar.")
-    elif 'n' in opcion.lower():
-        break
+num_intentos = int(input("Introduce el numero de intentos: "))
+cont = 1
+ganadas_usuario = 0
+ganadas_ordenador = 0
+
+while cont <= num_intentos:
+    print(f"Intento número: {cont}")
+    ordenador_mov = generar_movimientos()
+
+    usuario_mov = ""
+    movimiento_car = input("Selecciona un movimiento ('p' para piedra / 'a' para papel "
+                           "/ 't' para tijeras): ").lower()
+
+    if movimiento_car in ['p', 'a', 't']:
+        if movimiento_car == 'p':
+            usuario_mov = piedra
+        elif movimiento_car == 'a':
+            usuario_mov = papel
+        elif movimiento_car == 't':
+            usuario_mov = tijera
+
+        print(f"Elección del ordenador: {ordenador_mov}")
+        print(f"Elección del usuario: {usuario_mov}")
+
+        resultado = verificar_movimientos(usuario_mov, ordenador_mov)
+
+        if resultado == 1:
+            print(f"Has ganado la ronda, {nombre} !!!")
+            ganadas_usuario += 1
+        elif resultado == -1:
+            print("Gana el ordenador !!!")
+            ganadas_ordenador += 1
+        elif resultado == 0:
+            print("Empate !!!")
+        cont += 1
     else:
-        print('Entrada incorrecta. Vuelve a intentar.')
+        print("Entrada incorrecta. Vuelve a intentar.")
     print()
+
+print("RESULTADOS FINALES:")
+if ganadas_usuario > ganadas_ordenador:
+    print(f"Ha ganado la partida, {nombre}")
+    print("-------------------")
+    print(f"|{nombre} : {ganadas_usuario} | Ordenador: {ganadas_ordenador}")
+elif ganadas_ordenador > ganadas_usuario:
+    print("Ha ganado el ordenador.")
+    print("-------------------")
+    print(f"|{nombre} : {ganadas_usuario} | Ordenador: {ganadas_ordenador}")
+else:
+    print("Hubo un empate.")
+    print("-------------------")
+    print(f"|{nombre} : {ganadas_usuario} | Ordenador: {ganadas_ordenador}")
